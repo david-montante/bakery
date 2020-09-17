@@ -4,6 +4,6 @@ class Cookie < ActiveRecord::Base
   validates :storage, presence: true
 
   def ready?
-    true
+    (Time.current - self.created_at) / 1.minutes > 2
   end
 end
