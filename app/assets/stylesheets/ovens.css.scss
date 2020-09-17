@@ -1,3 +1,18 @@
 // Place all the styles related to the ovens controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.mobile {
+  display: none
+}
+
+
+@media only screen  and (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+
+  .web {
+    display: none;
+  }
+}
