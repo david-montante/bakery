@@ -313,6 +313,7 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   pg (~> 0.18)
+  pry
   puma (~> 3.7)
   rails (~> 5.1.0)
   rails-controller-testing
@@ -333,4 +334,4 @@ RUBY VERSION
    ruby 2.6.2p47
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
