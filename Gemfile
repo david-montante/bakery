@@ -60,6 +60,7 @@ group :development do
   gem 'guard-rspec'
   gem 'html2haml'
   gem 'spring-commands-rspec'
+  gem 'pry'
 end
 
 group :development, :test do
