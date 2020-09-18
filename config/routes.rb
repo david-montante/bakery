@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :ovens do
     resource :cookies
     member do
+      get 'refresh'
       post :empty
     end
   end
