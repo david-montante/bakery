@@ -8,7 +8,7 @@ feature 'Cooking cookies' do
     expect(page).to_not have_content 'Chocolate Chip'
     expect(page).to_not have_content 'Your Cookie is Ready'
 
-    click_link_or_button 'Prepare Cookie'
+    click_link_or_button('Prepare Cookie', match: :first)
     fill_in 'Fillings', with: 'Chocolate Chip'
     click_button 'Mix and bake'
 
@@ -41,11 +41,11 @@ feature 'Cooking cookies' do
     oven = FactoryGirl.create(:oven, user: user)
     visit oven_path(oven)
 
-    click_link_or_button 'Prepare Cookie'
+    click_link_or_button('Prepare Cookie', match: :first)
     fill_in 'Fillings', with: 'Chocolate Chip'
     click_button 'Mix and bake'
 
-    click_link_or_button  'Prepare Cookie'
+    click_link_or_button('Prepare Cookie', match: :first)
     expect(page).to have_content 'A cookie is already in the oven!'
     expect(current_path).to eq(oven_path(oven))
     expect(page).to_not have_button 'Mix and bake'
@@ -58,13 +58,16 @@ feature 'Cooking cookies' do
     oven = FactoryGirl.create(:oven, user: user)
     visit oven_path(oven)
 
-    3.times do
-      click_link_or_button 'Prepare Cookie'
-      fill_in 'Fillings', with: 'Chocolate Chip'
-      click_button 'Mix and bake'
+    click_link_or_button('Prepare Cookie', match: :first)
+    fill_in 'Fillings', with: 'Chocolate Chip'
+    fill_in 'Quantity', with: '3'
+    click_button 'Mix and bake'
 
-      click_button 'Retrieve Cookie'
-    end
+    cookie = oven.cookie
+    cookie.update(created_at: cookie.created_at - 2.minutes )
+    visit oven_path(oven)
+
+    click_button 'Retrieve Cookie'
 
     visit root_path
     within '.store-inventory' do
