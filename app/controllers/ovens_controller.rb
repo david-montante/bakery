@@ -16,4 +16,11 @@ class OvensController < ApplicationController
     end
     redirect_to @oven, alert: 'Oven emptied!'
   end
+
+  def refresh
+    @oven = current_user.ovens.find_by!(id: params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
 end
