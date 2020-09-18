@@ -7,6 +7,12 @@
   .row
     .small-8.columns
       = f.text_field :fillings
+  .row
+    .small-8.columns
+      = f.label :quantity
+  .row
+    .small-8.columns
+      = f.number_field :quantity, step: 1, required: true
 
   .row
     .small-8.columns
