@@ -1,26 +1,24 @@
 class OvensController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_oven, only: [:show, :empty, :refresh]
 
   def index
     @ovens = current_user.ovens
   end
 
-  def show
-    @oven = current_user.ovens.find_by!(id: params[:id])
-  end
-
   def empty
-    @oven = current_user.ovens.find_by!(id: params[:id])
-    if @oven.cookie
-      @oven.cookie.update_attributes!(storage: current_user)
-    end
+    @oven.cookie.update_attributes!(storage: current_user) if @oven.cookie
     redirect_to @oven, alert: 'Oven emptied!'
   end
 
   def refresh
-    @oven = current_user.ovens.find_by!(id: params[:id])
     respond_to do |format|
       format.js
     end
   end
+
+  private
+    def find_oven
+      @oven = current_user.ovens.find_by!(id: params[:id])
+    end
 end
